@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../Providers/AuthProvider/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 const Checkout = () => {
     const service = useLoaderData();
@@ -16,7 +16,7 @@ const Checkout = () => {
         const phone = form.phone.value;
         const booking = {
             customerName: name,
-            customerEmail: email,
+            email,
             date,
             img,
             service: title,
@@ -35,6 +35,9 @@ const Checkout = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
+            if(data.insertedId) {
+                alert('Service booked successfully');
+            }
         })
     }
     return (
@@ -52,7 +55,7 @@ const Checkout = () => {
                         <label className="label">
                             <span className="label-text"></span>
                         </label>
-                        <input type="date" name="name" placeholder="Service Date" className="input input-bordered" />
+                        <input type="date" name="date" placeholder="Service Date" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">
